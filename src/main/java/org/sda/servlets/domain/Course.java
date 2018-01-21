@@ -9,7 +9,7 @@ import java.util.List;
 @NamedQueries(value = {
         @NamedQuery(name = "get_all_courses", query = "select c from Course c"),
         @NamedQuery(name = "get_courses_named_testowo4",
-            query = "select c from Course c where name='Testowo4'")
+                query = "select c from Course c where name='Testowo4'")
 })
 public class Course {
     @Id
@@ -24,7 +24,8 @@ public class Course {
     @ManyToMany(mappedBy = "courses")
     List<User> users = new ArrayList<>();
 
-    protected Course() { }
+    protected Course() {
+    }
 
     public Course(String name) {
         this.name = name;
@@ -42,11 +43,11 @@ public class Course {
         this.name = name;
     }
 
-    public List<Review> getReviews(){
+    public List<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Review review){
+    public void setReviews(Review review) {
         this.reviews.add(review);
     }
 
