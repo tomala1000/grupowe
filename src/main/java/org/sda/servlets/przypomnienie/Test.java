@@ -15,16 +15,15 @@ public class Test {
     public static void main(String[] args) {
         Dog pimpus = new Dog();
         pimpus.setVoice("Hau Hau!");
-        pimpus = new Dog();
         changeVoice(pimpus);
         System.out.println(pimpus.getVoice());
 
-//        pimpus = changeVoiceAndReturn(pimpus);
-//        System.out.println(pimpus.getVoice());
+        pimpus = changeVoiceAndReturn(pimpus);
+        System.out.println(pimpus.getVoice());
 
-//        int wartosc = 10;
-//        changeValue(wartosc);
-//        System.out.println(wartosc);
+        int wartosc = 10;
+        changeValue(wartosc);
+        System.out.println(wartosc);
     }
 
     public static void changeVoice(Dog dog) {
@@ -39,8 +38,6 @@ public class Test {
         dog.setVoice("Kici kici");
         return dog;
     }
-
-
 
     public static void changeValue(int value){
         value = 15;

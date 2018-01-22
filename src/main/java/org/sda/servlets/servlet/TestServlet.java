@@ -1,6 +1,7 @@
 package org.sda.servlets.servlet;
 
 
+import org.sda.servlets.domain.User;
 import org.sda.servlets.repository.UserRepository;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -17,7 +18,7 @@ import java.io.PrintWriter;
 @WebServlet(value = "/test")
 public class TestServlet extends HttpServlet {
 
-    private UserRepository studentRepository;
+    private UserRepository userRepository;
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
@@ -25,7 +26,7 @@ public class TestServlet extends HttpServlet {
         ApplicationContext context =
                 WebApplicationContextUtils.getRequiredWebApplicationContext(
                         this.getServletContext());
-        studentRepository = context.getBean(UserRepository.class);
+        userRepository = context.getBean(UserRepository.class);
     }
 
     @Override
@@ -33,6 +34,11 @@ public class TestServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         out.println("Hello!");
-        out.println(studentRepository.findById(1));
+        User user = new User();
+        user.setEmail("email@o2.pl");
+        user.setFirstName("Jan");
+        user.setLastName("Kowalkis");
+        userRepository.save(user);
+        out.println(userRepository.findById(1));
     }
 }

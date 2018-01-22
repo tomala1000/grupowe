@@ -24,7 +24,7 @@ public class User {
     @ManyToMany
     private List<Course> courses = new ArrayList<>();
 
-    protected User() {
+    public User() {
     }
 
     public Long getId() {

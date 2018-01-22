@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-@Transactional
 public class UserRepository {
 
     @PersistenceContext
@@ -19,11 +18,13 @@ public class UserRepository {
         return em.find(User.class, id);
     }
 
+    @Transactional
     public void deleteById(long id) {
         User userToDelete = findById(id);
         em.remove(userToDelete);
     }
 
+    @Transactional
     public User save(User user) {
         if (user.getId() == null) {
             em.persist(user);
