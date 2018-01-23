@@ -6,6 +6,7 @@ import org.sda.servlets.repository.UserRepository;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(value = "/test")
-public class TestServlet extends HttpServlet {
+@WebServlet(value = "/users")
+public class UserServlet extends HttpServlet {
 
     private UserRepository userRepository;
 
@@ -30,15 +31,11 @@ public class TestServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        PrintWriter out = response.getWriter();
-        out.println("Hello!");
-        User user = new User();
-        user.setEmail("email@o2.pl");
-        user.setFirstName("Jan");
-        user.setLastName("Kowalkis");
-        userRepository.save(user);
-        out.println(userRepository.findAll());
+        request.setAttribute("usersList",userRepository.findAll());
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/userTable.jsp");
+        requestDispatcher.forward(request, response);
+
     }
 }
