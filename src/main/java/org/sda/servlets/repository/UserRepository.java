@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class UserRepository {
@@ -22,6 +23,11 @@ public class UserRepository {
     public void deleteById(long id) {
         User userToDelete = findById(id);
         em.remove(userToDelete);
+    }
+
+    @Transactional
+    public List<User> findAll(){
+        return (List<User>) em.createQuery("select u from User u").getResultList();
     }
 
     @Transactional
