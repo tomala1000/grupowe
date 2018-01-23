@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -28,6 +29,14 @@ public class UserRepository {
     @Transactional
     public List<User> findAll(){
         return (List<User>) em.createQuery("select u from User u").getResultList();
+    }
+
+
+    @Transactional
+    public List<User> findBy(String name){
+        Query query = em.createQuery("select u from User u where u.firstName like :name");
+        query.setParameter("name", "%" + name + "%");
+        return query.getResultList();
     }
 
     @Transactional
