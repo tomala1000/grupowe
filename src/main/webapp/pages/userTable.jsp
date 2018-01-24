@@ -44,6 +44,7 @@ USER TABLE
         <th>FirstName</th>
         <th>LastName</th>
         <th>Email</th>
+        <th>Actions</th>
     </tr>
     <c:forEach items="${usersList}" var="user">
         <tr>
@@ -55,6 +56,12 @@ USER TABLE
             </td>
             <td>
                     ${user.email}
+            </td>
+            <td>
+                    <form action="/getUserData" method="post">
+                        <input type="submit" value="Submit">
+                        <input type="hidden" value="${user.id}" name="userid">
+                    </form>
             </td>
         </tr>
     </c:forEach>
