@@ -12,9 +12,9 @@
 </head>
 <body>
 <form method="post" action="/register">
-    <input name="Name" value="Name">
-    <input name="Surname" value="Surname">
-    <input name="Email" value="typeYourEmail">
+    <input name="Name" value="Name" required>
+    <input name="Surname" value="Surname" required>
+    <input name="Email" value="typeYourEmail" required type="email">
     <input type="submit" value="Register">
 </form>
 

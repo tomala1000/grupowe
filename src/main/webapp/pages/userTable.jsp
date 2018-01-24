@@ -59,7 +59,7 @@ USER TABLE
             </td>
             <td>
                     <form action="/getUserData" method="post">
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Edit">
                         <input type="hidden" value="${user.id}" name="userid">
                     </form>
             </td>

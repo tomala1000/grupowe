@@ -1,5 +1,8 @@
 package org.sda.servlets.domain;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -11,6 +14,8 @@ public class Password {
     @GeneratedValue
     private Long id;
 
+    @NotBlank
+    @Length(min = 8)
     private String value;
 
     @OneToOne(optional = false)

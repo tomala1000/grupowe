@@ -2,6 +2,7 @@ package org.sda.servlets.servlet;
 
 import org.sda.servlets.domain.User;
 import org.sda.servlets.repository.UserRepository;
+import org.sda.servlets.util.UserValidation;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -31,11 +32,15 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-        out.println("Hello!");
         User user = new User();
         user.setEmail(req.getParameter("Email"));
         user.setFirstName(req.getParameter("Name"));
         user.setLastName(req.getParameter("Surname"));
-        userRepository.save(user);
+
+        if(UserValidation.validate(user)) {
+            userRepository.save(user);
+        } else {
+            out.println("Wrong data!");
+        }
     }
 }

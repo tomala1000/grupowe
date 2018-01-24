@@ -1,5 +1,7 @@
 package org.sda.servlets.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Course {
     @GeneratedValue
     private long id;
 
+    @NotBlank
     private String name;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
