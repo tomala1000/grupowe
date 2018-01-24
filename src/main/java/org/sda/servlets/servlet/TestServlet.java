@@ -39,6 +39,6 @@ public class TestServlet extends HttpServlet {
         user.setFirstName("Jan");
         user.setLastName("Kowalkis");
         userRepository.save(user);
-        out.println(userRepository.findAll());
+        out.println(userRepository.findBy("a"));
     }
 }

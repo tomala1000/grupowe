@@ -3,6 +3,7 @@ package org.sda.servlets.servlet;
 import org.sda.servlets.domain.User;
 import org.sda.servlets.repository.UserRepository;
 import org.sda.servlets.util.UserValidation;
+import org.sda.servlets.util.ValidationUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -12,8 +13,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.Set;
 
 @WebServlet(value = "/register")
 public class RegisterServlet extends HttpServlet {
@@ -37,9 +41,17 @@ public class RegisterServlet extends HttpServlet {
         user.setFirstName(req.getParameter("Name"));
         user.setLastName(req.getParameter("Surname"));
 
-        if(UserValidation.validate(user)) {
+        Set<ConstraintViolation<User>> violations = ValidationUtil.validateInternal(user);
+        if(violations.isEmpty()) {
             userRepository.save(user);
+            out.println("Good!");
         } else {
+            Iterator<ConstraintViolation<User>> violationIterator = violations.iterator();
+            while(violationIterator.hasNext()){
+                ConstraintViolation<User> violation = violationIterator.next();
+                System.out.println(violation.getPropertyPath());
+                System.out.println(violation.getMessage());
+            }
             out.println("Wrong data!");
         }
     }
