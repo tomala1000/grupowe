@@ -7,6 +7,7 @@ import org.sda.servlets.util.ValidationUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,6 +47,10 @@ public class RegisterServlet extends HttpServlet {
             userRepository.save(user);
             out.println("Good!");
         } else {
+            req.setAttribute("violations",violations);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/registerUser.jsp");
+            requestDispatcher.forward(req, resp);
+
             Iterator<ConstraintViolation<User>> violationIterator = violations.iterator();
             while(violationIterator.hasNext()){
                 ConstraintViolation<User> violation = violationIterator.next();
