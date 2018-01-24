@@ -1,13 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="org.sda.servlets.domain.User" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<fmt:setLocale value="pl_PL"/>
+<fmt:setBundle basename="org.sda.servlets.translations.mylabels"/>
+
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 USER TABLE
+<fmt:message key="label.greetings"/>
 
 <%
     List<User> users = (List<User>) request.getAttribute("usersList");
