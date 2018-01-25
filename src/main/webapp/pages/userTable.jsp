@@ -5,7 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <fmt:setLocale value="${not empty param.theLocale ? param.theLocale : 'pl_PL' }"/>
-<fmt:setLocale value="${not empty param.theLocale ? param.theLocale : 'pl_PL' }"/>
+<%--<fmt:setLocale value="pl_PL"/>--%>
 <fmt:setBundle basename="org.sda.servlets.translations.mylabels"/>
 
 <html>
@@ -13,12 +13,12 @@
     <title>Title</title>
 </head>
 <body>
-<a href="${requestScope['javax.servlet.forward.request_uri']}${"?theLocale=pl_PL"}">POLSKI </a>
-<a href="${requestScope['javax.servlet.forward.request_uri']}${"?theLocale=en_EN"}">ENG </a>
-<a href="http://localhost:8080/users?theLocale=pl_PL">ENG </a>
-<a href="http://localhost:8080/users?theLocale=en_EN">ENG </a>
+<%--<a href="${requestScope['javax.servlet.forward.request_uri']}${"?theLocale=pl_PL"}">POLSKI </a>--%>
+<%--<a href="${requestScope['javax.servlet.forward.request_uri']}${"?theLocale=en_EN"}">ENG </a>--%>
+<%--<a href="http://localhost:8080/users?theLocale=pl_PL">PLN </a>--%>
+<%--<a href="http://localhost:8080/users?theLocale=en_EN">ENG </a>--%>
 <br>
-<%--<%@include file="languageHeader.jsp"%>--%>
+<%@include file="languageHeader.jsp"%>
 
 USER TABLE
 <fmt:message key="label.greetings"/>
