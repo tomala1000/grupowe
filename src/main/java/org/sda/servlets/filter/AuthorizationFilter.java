@@ -20,6 +20,8 @@ public class AuthorizationFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         whiteList.add("/pages/login.jsp");
         whiteList.add("/login");
+        whiteList.add("/pages/registerUser.jsp");
+        whiteList.add("/registration");
     }
 
     @Override
