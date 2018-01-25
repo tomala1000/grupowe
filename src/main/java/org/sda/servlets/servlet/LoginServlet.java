@@ -3,6 +3,7 @@ package org.sda.servlets.servlet;
 import org.sda.servlets.domain.Password;
 import org.sda.servlets.domain.User;
 import org.sda.servlets.repository.UserRepository;
+import org.sda.servlets.util.PasswordUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -34,6 +35,14 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String passw = req.getParameter("password");
 
-
+        User user  = userRepository.findByEmail(email);
+        if(user != null){
+            Password password = userRepository.findBy(user);
+            if(PasswordUtil.checkPassword(passw, password.getValue())){
+//                zalogowano
+            } else {
+//                spróbuj jeszcze raz
+            }
+        }
     }
 }

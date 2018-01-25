@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -39,6 +42,29 @@ public class UserRepository {
         Query query = em.createQuery("select u from User u where u.firstName like :name");
         query.setParameter("name", "%" + name + "%");
         return query.getResultList();
+    }
+
+    @Transactional
+    public User findByEmail(String email) {
+        Query query = em.createQuery("select u from User u where u.email = :email");
+        query.setParameter("email", email);
+        return (User) query.getSingleResult();
+    }
+
+    @Transactional
+    public Password findBy(User user){
+        Query query = em.createQuery("select p from Password p where p.user = :user");
+        query.setParameter("user", user);
+        return (Password) query.getSingleResult();
+    }
+
+    @Transactional
+    public User findByUsingQriterica(String email){
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<User> query = criteriaBuilder.createQuery(User.class);
+        Root<User> userRoot = query.from(User.class);
+        query.where(criteriaBuilder.equal(userRoot.get("email"), email));
+        return em.createQuery(query).getSingleResult();
     }
 
     @Transactional
