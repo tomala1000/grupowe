@@ -34,11 +34,6 @@ public class TestServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         out.println("Hello!");
-        User user = new User();
-        user.setEmail("email@o2.pl");
-        user.setFirstName("Jan");
-        user.setLastName("Kowalkis");
-        userRepository.save(user);
         out.println(userRepository.findBy("a"));
     }
 }

@@ -37,7 +37,7 @@ public class EditServlet extends HttpServlet {
         user.setFirstName(request.getParameter("firstName"));
         user.setLastName(request.getParameter("lastName"));
         user.setEmail(request.getParameter("email"));
-        userRepository.save(user);
+        userRepository.update(user);
 
         request.setAttribute("usersList",userRepository.findAll());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/pages/userTable.jsp");

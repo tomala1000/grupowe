@@ -4,7 +4,8 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<fmt:setLocale value="pl_PL"/>
+<fmt:setLocale value="${not empty param.theLocale ? param.theLocale : 'pl_PL' }"/>
+<fmt:setLocale value="${not empty param.theLocale ? param.theLocale : 'pl_PL' }"/>
 <fmt:setBundle basename="org.sda.servlets.translations.mylabels"/>
 
 <html>
@@ -12,6 +13,13 @@
     <title>Title</title>
 </head>
 <body>
+<a href="${requestScope['javax.servlet.forward.request_uri']}${"?theLocale=pl_PL"}">POLSKI </a>
+<a href="${requestScope['javax.servlet.forward.request_uri']}${"?theLocale=en_EN"}">ENG </a>
+<a href="http://localhost:8080/users?theLocale=pl_PL">ENG </a>
+<a href="http://localhost:8080/users?theLocale=en_EN">ENG </a>
+<br>
+<%--<%@include file="languageHeader.jsp"%>--%>
+
 USER TABLE
 <fmt:message key="label.greetings"/>
 
@@ -64,10 +72,10 @@ USER TABLE
                     ${user.email}
             </td>
             <td>
-                    <form action="/getUserData" method="post">
-                        <input type="submit" value="Edit">
-                        <input type="hidden" value="${user.id}" name="userid">
-                    </form>
+                <form action="/getUserData" method="post">
+                    <input type="submit" value="Edit">
+                    <input type="hidden" value="${user.id}" name="userid">
+                </form>
             </td>
         </tr>
     </c:forEach>

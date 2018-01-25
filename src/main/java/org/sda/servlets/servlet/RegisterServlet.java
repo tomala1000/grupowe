@@ -42,9 +42,11 @@ public class RegisterServlet extends HttpServlet {
         user.setFirstName(req.getParameter("Name"));
         user.setLastName(req.getParameter("Surname"));
 
+        String passw = req.getParameter("password");
+
         Set<ConstraintViolation<User>> violations = ValidationUtil.validateInternal(user);
         if(violations.isEmpty()) {
-            userRepository.save(user);
+            userRepository.save(user, passw);
             out.println("Good!");
         } else {
             req.setAttribute("violations",violations);

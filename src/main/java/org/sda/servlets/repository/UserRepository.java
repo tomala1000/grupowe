@@ -1,6 +1,7 @@
 package org.sda.servlets.repository;
 
 
+import org.sda.servlets.domain.Password;
 import org.sda.servlets.domain.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class UserRepository {
     }
 
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<User> findBy(String name){
         Query query = em.createQuery("select u from User u where u.firstName like :name");
         query.setParameter("name", "%" + name + "%");
@@ -40,13 +41,23 @@ public class UserRepository {
     }
 
     @Transactional
-    public User save(User user) {
+    public User save(User user, String passw) {
         if (user.getId() == null) {
             em.persist(user);
+            Password password = new Password();
+            password.setUser(user);
+            password.setValue(passw);
+            em.persist(password);
         } //nowy wpis
         else {
-            em.merge(user);
-        } //aktualizacja poprzedniego
+            throw new UnsupportedOperationException();
+        }
+        return user;
+    }
+
+    @Transactional
+    public User update(User user){
+        em.merge(user);
         return user;
     }
 
