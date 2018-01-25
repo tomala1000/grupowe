@@ -3,6 +3,7 @@ package org.sda.servlets.repository;
 
 import org.sda.servlets.domain.Password;
 import org.sda.servlets.domain.User;
+import org.sda.servlets.util.PasswordUtil;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +47,7 @@ public class UserRepository {
             em.persist(user);
             Password password = new Password();
             password.setUser(user);
-            password.setValue(passw);
+            password.setValue(PasswordUtil.hashPassword(passw));
             em.persist(password);
         } //nowy wpis
         else {
