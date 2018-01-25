@@ -15,7 +15,6 @@ public class Password {
     private Long id;
 
     @NotBlank
-    @Length(min = 8)
     private String value;
 
     @OneToOne(optional = false)
