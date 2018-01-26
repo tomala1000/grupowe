@@ -27,8 +27,8 @@
           destroy-method="close">
         <property name="driverClassName" value="org.postgresql.Driver" />
         <property name="url" value="jdbc:postgresql://localhost:5432/sda_db" />
-        <property name="username" value="sda_user" />
-        <property name="password" value="sda_password" />
+        <property name="username" value="postgres" />
+        <property name="password" value="postgres" />
     </bean>
 
     <bean id="entityManagerFactory"
@@ -40,7 +40,7 @@
         </property>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
                 <prop key="show_sql">true</prop>
             </props>
