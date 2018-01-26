@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class AuthorizationFilter implements Filter {
 
     private List<String> whiteList = new ArrayList<>();
@@ -21,7 +21,7 @@ public class AuthorizationFilter implements Filter {
         whiteList.add("/pages/login.jsp");
         whiteList.add("/login");
         whiteList.add("/pages/registerUser.jsp");
-        whiteList.add("/registration");
+        whiteList.add("/register");
     }
 
     @Override
