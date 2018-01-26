@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 
 @Controller
 public class HelloController {
@@ -41,6 +42,13 @@ public class HelloController {
 
         model.put("usersList", userRepository.findAll());
         return "userTable";
+    }
+
+    @RequestMapping(value = "/getUserByData", method = RequestMethod.POST)
+    public String getUserData(@RequestParam("userid") Long userIdParam, ModelMap model) {
+
+        model.put("user", userRepository.findById(userIdParam));
+        return "userEdit";
     }
 
 }

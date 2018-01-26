@@ -72,7 +72,7 @@ USER TABLE
                     ${user.email}
             </td>
             <td>
-                <form action="/getUserData" method="post">
+                <form action="/getUserByData" method="post">
                     <input type="submit" value="Edit">
                     <input type="hidden" value="${user.id}" name="userid">
                 </form>
