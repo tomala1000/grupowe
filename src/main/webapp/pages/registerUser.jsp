@@ -24,10 +24,10 @@
     </C:forEach>
 </c:if>
 
-<form method="post" action="/register">
-    <input name="Name" value="Name" required>
-    <input name="Surname" value="Surname" required>
-    <input name="Email" value="typeYourEmail" required type="email">
+<form method="post" action="/registration">
+    <input name="firstName" value="Name" required>
+    <input name="lastName" value="Surname" required>
+    <input name="email" value="typeYourEmail" required type="email">
     <input name="password" required type="password">
     <input type="submit" value="Register">
 </form>

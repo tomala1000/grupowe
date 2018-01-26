@@ -19,9 +19,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 @WebServlet(value = "/register")
 public class RegisterServlet extends HttpServlet {
+
+    private Logger LOGGER;;
 
     private UserRepository userRepository;
 
@@ -38,16 +42,17 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         User user = new User();
-        user.setEmail(req.getParameter("Email"));
-        user.setFirstName(req.getParameter("Name"));
-        user.setLastName(req.getParameter("Surname"));
+        user.setEmail(req.getParameter("email"));
+        user.setFirstName(req.getParameter("firstName"));
+        user.setLastName(req.getParameter("lastName"));
 
         String passw = req.getParameter("password");
 
         Set<ConstraintViolation<User>> violations = ValidationUtil.validateInternal(user);
         if(violations.isEmpty()) {
             userRepository.save(user, passw);
-            out.println("Good!");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/login");
+            requestDispatcher.forward(req, resp);
         } else {
             req.setAttribute("violations",violations);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/registerUser.jsp");
