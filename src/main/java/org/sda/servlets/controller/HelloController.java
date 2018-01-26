@@ -34,7 +34,7 @@ public class HelloController {
     public String register(@Validated @ModelAttribute User user, BindingResult bindingResult,
                            @RequestParam("password") String passwordParam, ModelMap model) {
         if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors();
+//            bindingResult.getAllErrors();
             return "error";
         }
         userRepository.save(user, passwordParam);
