@@ -9,6 +9,7 @@
 
     <context:component-scan base-package = "org.sda.servlets.repository" />
     <context:component-scan base-package = "org.sda.servlets.controller" />
+    <context:component-scan base-package = "org.sda.servlets.rest" />
     <!--<context:component-scan base-package = "org.sda.services" />-->
     <!--<context:component-scan base-package = "org.sda.validators" />-->
 
@@ -40,7 +41,7 @@
         </property>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
                 <prop key="show_sql">true</prop>
             </props>
@@ -49,6 +50,19 @@
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+    <bean
+            class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="jacksonObjectMapper"/>
+        <property name="targetMethod" value="configure"/>
+        <property name="arguments">
+            <list>
+                <value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value>
+                <value>false</value>
+            </list>
+        </property>
     </bean>
 
 </beans>

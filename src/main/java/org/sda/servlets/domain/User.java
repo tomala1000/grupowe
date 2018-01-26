@@ -1,5 +1,6 @@
 package org.sda.servlets.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -32,6 +33,7 @@ public class User {
     private String email;
 
     @ManyToMany
+    @JsonIgnore
     private List<Course> courses = new ArrayList<>();
 
     public User() {
