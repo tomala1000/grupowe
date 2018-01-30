@@ -20,6 +20,7 @@
         <fileset id="web HelloWeb servlet context" name="MVC HelloWeb servlet context" removed="true">
           <dependency>web application context</dependency>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/HelloWeb-servlet.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/sda-servlet.xml</file>
         </fileset>
       </configuration>
     </facet>

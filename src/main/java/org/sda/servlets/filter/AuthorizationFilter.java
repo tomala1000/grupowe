@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//@WebFilter("/*")
+@WebFilter("/*")
 public class AuthorizationFilter implements Filter {
 
     private List<String> whiteList = new ArrayList<>();
