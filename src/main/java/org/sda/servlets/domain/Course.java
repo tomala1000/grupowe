@@ -27,7 +27,7 @@ public class Course {
     @ManyToMany(mappedBy = "courses")
     List<User> users = new ArrayList<>();
 
-    protected Course() {
+    public Course() {
     }
 
     public Course(String name) {

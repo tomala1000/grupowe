@@ -3,6 +3,7 @@ package org.sda.servlets.repository;
 
 import org.sda.servlets.domain.Course;
 import org.sda.servlets.domain.Review;
+import org.sda.servlets.domain.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,12 @@ public class CourseRepository {
             em.merge(course);
         }
         return course;
+    }
+
+    @Transactional
+    public List<Course> findAll(){
+
+        return (List<Course>) em.createQuery("select c from Course c").getResultList();
     }
 
     public void playWithEntityManager() {
